@@ -1,10 +1,15 @@
-# Título: Kulúnda
+# Kulúnda
 
 **Autores:** Anastácio e Vamoss
+
 **URL:** [https://kulunda.github.io/kulunda/](https://kulunda.github.io/kulunda/)
+
 **Técnica:** Programação criativa com ThreeJs e p5Js
+
 **Colaboração:** Capitã Pedrina de Lourdes e Victor Dias
+
 **Acervo de imagens:** [Biblioteca Nacional](https://bndigital.bn.gov.br/acervodigital)
+
 **Ano:** 2021
  
  
