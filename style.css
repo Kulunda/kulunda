@@ -1,5 +1,77 @@
+@font-face {
+	font-family: 'skya';
+	src: url('fonts/skia_regular.ttf') format('truetype');
+  }  
+
 html,
 body {
 	margin: 0;
 	padding: 0;
+	font-family: 'skya', Tahoma, Sans-Serif;
+}
+
+canvas {
+	display: block;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: -1;
+}
+
+#container {
+	position: absolute;
+    top: 10%;
+    left: 50%;
+    margin-left: -30%;
+    width: 60%;
+    background: rgba(0, 0, 0, 80%);
+    color: #FFF;
+    font-size: 21px;
+	padding-bottom: 100px;
+	text-align: justify;
+	z-index: 1;
+}
+
+#container p{
+	margin: 100px;
+}
+
+#container a{
+	position: absolute;
+    bottom: 70px;
+    left: 50%;
+    margin-left: -70px;
+    width: 100px;
+    border: 2px solid white;
+    padding: 10px;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+	transition: box-shadow 0.5s;
+	box-shadow: -8px 8px 0 -2px #000, -8px 8px 0 0 #FFF;
+}
+
+#container a:hover{
+	box-shadow: -16px 16px 0 -2px #000, -16px 16px 0 0 #FFF;
+}
+
+@media (max-width: 1280px)
+{
+	#container {
+		margin-left: -40%;
+		width: 80%;
+	}
+}
+
+@media (max-width: 1024px)
+{
+	#container {
+		margin-left: -45%;
+		width: 90%;
+	}
+
+	#container p{
+		margin: 50px;
+	}
 }
