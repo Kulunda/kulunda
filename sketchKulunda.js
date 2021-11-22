@@ -127,7 +127,7 @@ function init() {
 	gui.add(config, 'radialSegments', 3, 10, 1);
 	gui.add(config, 'dryWet', 0, 1);
 	for (let controller of gui.__controllers) controller.onChange(buildCristal);
-	dat.GUI.toggleHide();
+	//dat.GUI.toggleHide();
 	
 	var windowHalfX = window.innerWidth / 2;
 	var windowHalfY = window.innerHeight / 2;
@@ -298,6 +298,15 @@ function init() {
 	}
 	//MouseEvents
 	document.addEventListener("mousedown", function(e){
+		//not loaded
+		if(!vissungo)
+			return false;
+
+		//song ended
+		if(vissungo.currentTime() > vissungo.duration() - 0.1)
+			return false;
+
+		//grow or shirnk the cristal
 		var growthFactor = 1;
 		if(isOnRhythm()){
 			growthFactor = 3;
@@ -416,7 +425,7 @@ function init() {
 				lastRhythmDiv = div;
 				lastRhythmTime = vissungo.currentTime();
 			}
-			*/
+			/**/
 		}
 			
 		render();
