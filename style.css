@@ -36,12 +36,14 @@ canvas {
 	margin: 100px;
 }
 
+#container .vissungos{
+	display: flex;
+	padding: 0 75px;
+}
+
 #container a{
-	position: absolute;
-    bottom: 70px;
-    left: 50%;
-    margin-left: -70px;
-    width: 100px;
+	flex: 1;
+	margin: 0 30px;
     border: 2px solid white;
     padding: 10px;
     font-size: 20px;
@@ -52,8 +54,42 @@ canvas {
 	box-shadow: -8px 8px 0 -2px #000, -8px 8px 0 0 #FFF;
 }
 
+#container a b{
+	display: block;
+	margin-top: 10px;
+}
+
 #container a:hover{
 	box-shadow: -16px 16px 0 -2px #000, -16px 16px 0 0 #FFF;
+}
+
+.rhythmViz {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	background-color: #FFF;
+    width: 100%;
+}
+.rhythmViz div{
+    height: 20px;
+	width: 20px;
+	position: absolute;
+	bottom: 0px;
+}
+.rhythmViz span {
+	transform: rotate(-90deg);
+	transform-origin: right, top;
+	position: absolute; 
+	color: #FFF;
+	margin-top: -30px;
+	margin-left: -7px;
+}
+
+.rhythmViz .on{
+	background-color: #0F0;
+}
+.rhythmViz .off{
+	background-color: #F00;
 }
 
 @media (max-width: 1280px)
@@ -61,6 +97,11 @@ canvas {
 	#container {
 		margin-left: -40%;
 		width: 80%;
+	}
+	
+
+	#container .vissungos{
+		padding: 0 70px;
 	}
 }
 
@@ -73,5 +114,16 @@ canvas {
 
 	#container p{
 		margin: 50px;
+	}
+	
+
+	#container .vissungos{
+		padding: 0 17px;
+		flex-wrap: wrap;
+	}
+
+	#container a{
+		flex: 35%;
+		margin-bottom: 30px;
 	}
 }

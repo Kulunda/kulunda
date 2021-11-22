@@ -25,13 +25,42 @@ let config = {
 	dryWet: 1
 };
 
+var url_string = window.location.href;
+var url = new URL(url_string);
+var vissungoId = url.searchParams.get("vissungo");
+if(!vissungoId) vissungoId = "01";
+
+//rithm config
+var firstHit, interval, hits, precision;
+if(vissungoId == "01") {
+	firstHit = 0;
+	interval = 3451;
+	hits = [573, 1167, 2249, 2844];
+	precision = 150;
+}else if(vissungoId == "02") {
+	firstHit = 0;
+	interval = 2726.83333;
+	hits = [457, 920, 1771, 2243];
+	precision = 150;
+}else if(vissungoId == "03") {
+	firstHit = 0;
+	interval = 3940.3;
+	hits = [509, 1074, 2473, 3048];
+	precision = 250;
+}else if(vissungoId == "04") {
+	firstHit = 83;
+	interval = 4144.1;
+	hits = [616, 1210, 2684, 3281];
+	precision = 250;
+}
+
 //audio from p5js
 var reverb;
 var vissungo;
 var picareta;
 var tambor;
 function preload(){
-	vissungo = loadSound('sounds/Vissungo.mp3');
+	vissungo = loadSound('sounds/vissungo' + vissungoId + '.mp3');
 	picareta = loadSound('sounds/picareta.mp3');
 	tambor = loadSound('sounds/tambor.mp3');
 }
@@ -255,12 +284,8 @@ function init() {
 	});
 		
 	// Audio
-	//MouseEvents
-	document.addEventListener("mousedown", function(e){
-		const firstHit = 0;
-		const interval = 3000;
-		const hits = [507, 1003, 1950, 2456];
-		const precision = 150;
+	function isOnRhythm(){
+		if(!vissungo) return false;
 		var seconds = vissungo.currentTime();
 		var millis = Math.floor(seconds * 1000 - firstHit);
 		var sample = millis % interval;
@@ -269,8 +294,12 @@ function init() {
 			rule |= sample > hit-precision && sample < hit+precision;	
 		});
 		//console.log(millis, millis%interval, rule);
+		return rule;
+	}
+	//MouseEvents
+	document.addEventListener("mousedown", function(e){
 		var growthFactor = 1;
-		if(rule){
+		if(isOnRhythm()){
 			growthFactor = 3;
 			tambor.play();
 		}else{
@@ -329,24 +358,55 @@ function init() {
 		scene.add(cristal);
 	}
 	
+	//rhythm viz
+	var lastRhythmState = true;
+	var lastRhythmTime = 0;
+	var lastRhythmDiv;
+	var rhythmVizEl = document.querySelector(".rhythmViz");
+
+
 	var phase = 0;
 	function animate() {
-			phase = camera.rotation.x + camera.rotation.y + camera.rotation.z;
-			//phase += dist(mouseX, mouseY, pmouseX, pmouseY) / 100;
-			var dryWet = (Math.sin(phase) + 1) / 2;
-			if(reverb){
-				// 1 = all reverb, 0 = no reverb
-				reverb.drywet(dryWet);
+		phase = camera.rotation.x + camera.rotation.y + camera.rotation.z;
+		//phase += dist(mouseX, mouseY, pmouseX, pmouseY) / 100;
+		var dryWet = (Math.sin(phase) + 1) / 2;
+		if(reverb){
+			// 1 = all reverb, 0 = no reverb
+			reverb.drywet(dryWet);
+		}
+
+		if(vissungo){
+			var audioPct = vissungo.currentTime() / vissungo.duration();
+			if(!isNaN(audioPct)){
+				var elevation = 93 - ((Math.sin(audioPct * TWO_PI -HALF_PI) + 1) / 2) * 90;
+				var azimuth = audioPct * 180 + 90;
+				setSunPosition(elevation, azimuth);
 			}
 
-			if(vissungo){
-				var audioPct = vissungo.currentTime() / vissungo.duration();
-				if(!isNaN(audioPct)){
-					var elevation = 93 - ((Math.sin(audioPct * TWO_PI -HALF_PI) + 1) / 2) * 90;
-					var azimuth = audioPct * 180 + 90;
-					setSunPosition(elevation, azimuth);
-				}
+
+			//DEBUG RHYTHM
+			/*
+			var onRhythm = isOnRhythm();
+			if(onRhythm != lastRhythmState){
+				lastRhythmState = onRhythm;
+
+				var div = document.createElement("div");
+				div.className = onRhythm ? "on" : "off";
+				div.style.left = (audioPct * 100) + "%";
+				rhythmVizEl.appendChild(div);
+
+				var span = document.createElement("span");
+				div.appendChild(span);
+				span.innerText = Math.floor(vissungo.currentTime() * 1000);
+				
+				if(lastRhythmDiv)
+					lastRhythmDiv.style.width = ((vissungo.currentTime() - lastRhythmTime) / vissungo.duration() * 100) + "%";
+			
+				lastRhythmDiv = div;
+				lastRhythmTime = vissungo.currentTime();
 			}
+			*/
+		}
 			
 		requestAnimationFrame(animate.bind(this));
 		render();
