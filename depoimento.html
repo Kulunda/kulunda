@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Kulúnda - Depoimento</title>
+	<script src="libs/p5js-1.4/p5.min.js"></script>
+	<script src="libs/green-audio-player/green-audio-player.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="libs/green-audio-player/green-audio-player.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id="header">
+		<a href="/">Página Inicial</a>
+		<a href="/depoimento.html" class="active">Depoimento</a>
+	</div>
+	<div id="container">
+		<p>
+            <img src="images/pedrina.png"/>
+			<br/><br/>
+            <b>Pedrina</b> apresentação.
+            <span class="player">
+                <audio controls preload="metadata">
+                    <source src="sounds/pedrina_apresentacao.mp3" type="audio/mpeg">
+                </audio>
+            </span>
+            Navio:
+            <span class="player">
+                <audio controls preload="metadata">
+                    <source src="sounds/pedrina_navio.mp3" type="audio/mpeg">
+                </audio>
+            </span>
+		</p>
+	</div>
+	<script src="sketchHome.js"></script>
+    <script type="text/javascript">
+        GreenAudioPlayer.init({
+            selector: '.player',
+            stopOthersOnPlay: true
+        });
+    </script>
+</body>
+</html>

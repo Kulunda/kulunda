@@ -18,14 +18,48 @@ canvas {
 	z-index: -1;
 }
 
+audio
+{
+	display: none;
+}
+
+.player {
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 40px;
+}
+
+#header {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background-color: #000;
+	display: block;
+	width: 100%;
+	z-index: 10000;
+	padding-left: 20%;
+}
+
+#header a{
+	color: #FFF;
+	text-decoration: none;
+	padding: 10px;
+	display: inline-block;
+	font-size: 24px;
+}
+
+#header a.active{
+	text-decoration: underline;
+}
+
 #container {
 	position: absolute;
     top: 10%;
     left: 50%;
     margin-left: -30%;
     width: 60%;
-    background: rgba(0, 0, 0, 80%);
-    color: #FFF;
+    background: rgba(0, 0, 0, 90%);
+    color: #CCC;
     font-size: 21px;
 	padding-bottom: 100px;
 	text-align: justify;
@@ -33,7 +67,15 @@ canvas {
 }
 
 #container p{
-	margin: 100px;
+	margin: 90px 90px 60px 90px;
+}
+
+#container img{
+	width: 100%;
+}
+
+#container p b{
+    color: #FFF;
 }
 
 #container .vissungos{
@@ -43,7 +85,7 @@ canvas {
 
 #container a{
 	flex: 1;
-	margin: 0 30px;
+	margin: 0 20px;
     border: 2px solid white;
     padding: 10px;
     font-size: 20px;
@@ -94,6 +136,10 @@ canvas {
 
 @media (max-width: 1280px)
 {
+	#header {
+		padding-left: 10%;
+	}
+
 	#container {
 		margin-left: -40%;
 		width: 80%;
@@ -107,6 +153,10 @@ canvas {
 
 @media (max-width: 1024px)
 {
+	#header {
+		padding-left: 5%;
+	}
+
 	#container {
 		margin-left: -45%;
 		width: 90%;

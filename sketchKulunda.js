@@ -146,12 +146,12 @@ function init() {
     });
 		*/
 	const urls = [];
-	urls.push("images/img01.png");
-	urls.push("images/img01.png");
-	urls.push("images/img01.png");
-	urls.push("images/img01.png");
-	urls.push("images/img01.png");
-	urls.push("images/img01.png");
+	urls.push("images/img" + vissungoId + ".png");
+	urls.push("images/img" + vissungoId + ".png");
+	urls.push("images/img" + vissungoId + ".png");
+	urls.push("images/img" + vissungoId + ".png");
+	urls.push("images/img" + vissungoId + ".png");
+	urls.push("images/img" + vissungoId + ".png");
 		
     const textureCube = new THREE.CubeTextureLoader().load(urls);
     textureCube.format = THREE.RGBFormat;
