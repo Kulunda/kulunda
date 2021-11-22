@@ -15,13 +15,13 @@ http://github.com/vamoss
 //included water: https://threejs.org/examples/?q=water#webgl_shaders_ocean
 
 let config = {
-	scale: 0.1,
+	scale: 0.2,
 	height: 6.8,
 	heightTop: 3,
 	heightBottom: 3,
 	radiusTop: 4.3,
 	radiusBottom: 4,
-	radialSegments: 4,
+	radialSegments: 5,
 	dryWet: 1
 };
 
@@ -225,8 +225,8 @@ function init() {
 	skyUniforms[ 'mieCoefficient' ].value = 0.005;
 	skyUniforms[ 'mieDirectionalG' ].value = 0.8;
 	const parameters = {
-		elevation: 2,
-		azimuth: 180
+		elevation: -3,
+		azimuth: 90
 	};
 	const pmremGenerator = new THREE.PMREMGenerator( renderer );
 	function updateSun() {
@@ -365,24 +365,35 @@ function init() {
 	var rhythmVizEl = document.querySelector(".rhythmViz");
 
 
+	var stats = new Stats();
+	stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+	//document.body.appendChild( stats.dom );
+
+
+	//performance monitor
+	var prevTime = Date.now(), frames = 0;
+
+	var updateSunSpeed = 4;
+
 	var phase = 0;
+	var customFrameCount = 0;
 	function animate() {
+		customFrameCount++;
 		phase = camera.rotation.x + camera.rotation.y + camera.rotation.z;
 		//phase += dist(mouseX, mouseY, pmouseX, pmouseY) / 100;
 		var dryWet = (Math.sin(phase) + 1) / 2;
 		if(reverb){
 			// 1 = all reverb, 0 = no reverb
-			reverb.drywet(dryWet);
+			reverb.drywet(dryWet / 2);
 		}
 
 		if(vissungo){
 			var audioPct = vissungo.currentTime() / vissungo.duration();
-			if(!isNaN(audioPct)){
+			if(!isNaN(audioPct) && customFrameCount%updateSunSpeed == 0){
 				var elevation = 93 - ((Math.sin(audioPct * TWO_PI -HALF_PI) + 1) / 2) * 90;
 				var azimuth = audioPct * 180 + 90;
 				setSunPosition(elevation, azimuth);
 			}
-
 
 			//DEBUG RHYTHM
 			/*
@@ -408,8 +419,28 @@ function init() {
 			*/
 		}
 			
-		requestAnimationFrame(animate.bind(this));
 		render();
+		stats.end();
+
+		//performance
+		frames++;
+		var time = Date.now();
+		if ( time >= prevTime + 1000 ) {
+			if(frames >= 60) {
+				updateSunSpeed = 2;
+			}else if(frames >= 40) {
+				updateSunSpeed = 4;
+			}else if(frames >= 20) {
+				updateSunSpeed = 8;
+			}else{
+				updateSunSpeed = 16;
+			}
+
+			prevTime = time;
+			frames = 0;
+		}
+
+		requestAnimationFrame(animate.bind(this));
 	}
 	function render() {
 		controls.update();

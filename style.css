@@ -33,7 +33,7 @@ audio
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	background-color: #000;
+	background-color: rgba(0, 0, 0, 80%);
 	display: block;
 	width: 100%;
 	z-index: 10000;
