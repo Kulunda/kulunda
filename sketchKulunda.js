@@ -396,6 +396,8 @@ function init() {
 			reverb.drywet(dryWet / 2);
 		}
 
+		water.material.uniforms[ 'time' ].value += 1.0 / 120.0;
+
 		if(vissungo){
 			var audioPct = vissungo.currentTime() / vissungo.duration();
 			if(!isNaN(audioPct) && customFrameCount%updateSunSpeed == 0){
