@@ -127,7 +127,7 @@ function init() {
 	gui.add(config, 'radialSegments', 3, 10, 1);
 	gui.add(config, 'dryWet', 0, 1);
 	for (let controller of gui.__controllers) controller.onChange(buildCristal);
-	//dat.GUI.toggleHide();
+	dat.GUI.toggleHide();
 	
 	var windowHalfX = window.innerWidth / 2;
 	var windowHalfY = window.innerHeight / 2;
