@@ -33,7 +33,7 @@ audio
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	background-color: rgba(0, 0, 0, 80%);
+	background-color: rgba(0, 0, 0, 40%);
 	display: block;
 	width: 100%;
 	z-index: 10000;
@@ -66,7 +66,7 @@ audio
 	z-index: 1;
 }
 
-#container p{
+#container .row{
 	margin: 90px 90px 60px 90px;
 }
 
@@ -74,7 +74,7 @@ audio
 	width: 100%;
 }
 
-#container p b{
+#container .row b{
     color: #FFF;
 }
 
@@ -162,7 +162,7 @@ audio
 		width: 90%;
 	}
 
-	#container p{
+	#container .row{
 		margin: 50px;
 	}
 	
